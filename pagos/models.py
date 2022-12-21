@@ -24,3 +24,16 @@ class Services(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     logo = models.URLField()
+
+class Payment_user(models.Model):
+    id_payment = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
+    amount =  models.FloatField(default=0.0)
+    paymentDate = models.DateField(auto_now_add=True)
+    expirationDate = models.DateField()
+    
+class Expired_payments(models.Model):
+    id_expired = models.AutoField(primary_key=True)
+    payment_user_id = models.ForeignKey(Payment_user, on_delete=models.CASCADE)
+    penalty_fee_amount = models.FloatField(default=0.0)

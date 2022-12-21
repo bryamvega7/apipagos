@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'pagos',
     'users',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -131,12 +132,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.ScopedRateThrottle',
+        
     ],
     'DEFAULT_THROTTLE_RATES': {
         'pagos': '1000/day',
-
+        'otros': '2000/day',
     }
 }
 
@@ -147,3 +151,4 @@ CACHES = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+

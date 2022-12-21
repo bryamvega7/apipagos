@@ -42,8 +42,6 @@ class LoginView(APIView):
             tokens = create_jwt_pair_for_user(user)
             idUser = User.objects.get(email=email)
             response = {"message": "Logeado correctamente", "id": idUser.id ,"tokens": tokens}
-            if tokens:
-                login(self.request,idUser)
 
             return Response(data=response, status=status.HTTP_200_OK)
 
