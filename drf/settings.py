@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 ]
 
-CSRF_TRUSTED_ORIGINS=["apipagos-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS=["https://apipagos-production.up.railway.app"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
