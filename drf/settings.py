@@ -172,3 +172,4 @@ CORS_ORIGIN_WHITELIST = (
 
 AUTH_USER_MODEL = 'users.User'
 
+CSRF_TRUSTED_ORIGINS = ['https://https://apipagos-production.up.railway.app']
