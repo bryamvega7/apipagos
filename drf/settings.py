@@ -165,10 +165,7 @@ CACHES = {
     },
 }
 
-CORS_ORIGIN_WHITELIST = (
-    "http://localhost:8000",
-    "https://apipagos-production.up.railway.app"
-)
+
 
 AUTH_USER_MODEL = 'users.User'
 
