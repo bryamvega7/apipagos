@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-cgc*!l9w5%9_287fuj!flj@@2xf3749!8gwq&1)8o3m@353vmk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['apipagos-production.up.railway.app']
 
 
 # Application definition
