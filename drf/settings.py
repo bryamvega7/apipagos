@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'pagos',
     'users',
     'drf_yasg',
+    'corsheaders',
 ]
 
 CSRF_TRUSTED_ORIGINS=["https://apipagos-production.up.railway.app"]
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'drf.urls'
@@ -132,6 +134,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_STORAGE= 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
