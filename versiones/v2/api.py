@@ -11,7 +11,7 @@ class ServicesViewSet(viewsets.ModelViewSet):
     queryset = Services.objects.all()
     pagination_class = StandardResultsSetPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    ordering_fields = ['id','name']
+    ordering_fields = ['id_services','name']
     search_fields = ['name']
     throttle_scope = 'pagos'
     
@@ -83,8 +83,8 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
     queryset = Payment_user.objects.all()
     pagination_class = StandardResultsSetPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    ordering_fields = ['id','service_id','user_id']
-    search_fields = ['payment_date', 'expiration_date']
+    ordering_fields = ['id_payment','user_id','service_id']
+    search_fields = ['paymentDate', 'expirationDate']
     throttle_scope = 'pagos'
 
     def get_serializer_class(self):
@@ -121,9 +121,9 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
             if isinstance(request.data, list):
                 lista = []
                 for i in range(len(request.data)):
-                    if request.data[i]["expiration_date"] < serializer.data[i]["payment_date"]:
+                    if request.data[i]["expirationDate"] < serializer.data[i]["paymentDate"]:
                         lista.append({
-                            "pay_user_id": serializer.data[i]["id"],
+                            "payment_user_id": serializer.data[i]["id_expired"],
                             "penalty_fee_amount": 15.00
                             })
                 expired_serial=ExpiredPaymentsSerializer(data=lista, many=True)
@@ -131,9 +131,9 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
                 if expired_serial.is_valid():
                     ExpiredPaymentsViewSet.create(ExpiredPaymentsViewSet,request=expired_serial)
             else:
-                if request.data["expiration_date"] < serializer.data["payment_date"]:
+                if request.data["expirationDate"] < serializer.data["paymentDate"]:
                     expired_serial=ExpiredPaymentsSerializer(data={
-                        "pay_user_id": serializer.data["id"],
+                        "payment_user_id": serializer.data["id_expired"],
                         "penalty_fee_amount": 15.00
                         })
                         
@@ -151,9 +151,9 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
 
-            if request.data["expiration_date"] < serializer.data["payment_date"]:
+            if request.data["expirationDate"] < serializer.data["paymentDate"]:
                 expired_serial=ExpiredPaymentsSerializer(data={
-                    "pay_user_id": serializer.data["id"],
+                    "payment_user_id": serializer.data["id_expired"],
                     "penalty_fee_amount": 15.00
                     })
                     
@@ -171,9 +171,9 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
 
-            if request.data["expiration_date"] < serializer.data["payment_date"]:
+            if request.data["expirationDate"] < serializer.data["paymentDate"]:
                 expired_serial=ExpiredPaymentsSerializer(data={
-                    "pay_user_id": serializer.data["id"],
+                    "payment_user_id": serializer.data["id_expired"],
                     "penalty_fee_amount": 15.00
                     })
                     
@@ -197,8 +197,8 @@ class ExpiredPaymentsViewSet(viewsets.ModelViewSet):
     queryset = Expired_payments.objects.all()
     pagination_class = StandardResultsSetPagination
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    ordering_fields = ['id','pay_user_id','penalty_fee_amount']
-    search_fields = ['pay_user_id__user_id__username','penalty_fee_amount']
+    ordering_fields = ['id_expired','payment_user_id','penalty_fee_amount']
+    search_fields = ['payment_user_id','penalty_fee_amount']
     throttle_scope = 'pagos'
     
     def get_serializer_class(self):
