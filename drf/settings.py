@@ -154,8 +154,10 @@ REST_FRAMEWORK = {
         
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'pagos': '1000/day',
-        'otros': '2000/day',
+        'pagos': '100000/day',
+        #'pagos': '1000/day',
+        'otros': '200000/day',
+        #'otros': '2000/day',
     }
 }
 
